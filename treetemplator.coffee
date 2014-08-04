@@ -13,9 +13,10 @@ class State
     @counters = []
   up: ->
     @level++
-    @counters[@level] = 0
+    @counters.push(0)
   down: ->
     @level--
+    @counters.pop()
   next: ->
     @counters[@level]++
 
@@ -33,19 +34,20 @@ class Templator
 
   replaceCounters = (tpl, state) ->
     if tpl?
-      i = 0
-      for value in state.counters.reverse()
-        i++
-        r = new RegExp "\\$#{i}", 'g'
-        tpl.replace r, value
+      j = 0
+      for i in [state.counters.length-1..0]
+        r = new RegExp "\\$#{j}", 'g'
+        tpl = tpl.replace r, state.counters[i]
+        j++
       tpl
 
   apply: (data, tpl, state = new State()) ->
-    state.up()
-    result = if isArray data
+    if isArray data
+      state.up()
       array = for item in data
         state.next()
         @apply item, tpl, state
+      state.down()
       array.join tpl?._delimeter || @opts.defaultDelimeter
     else
       t = if typeof tpl is 'object' then tpl._ else tpl
@@ -53,12 +55,11 @@ class Templator
         for p of data when data.hasOwnProperty(p) and p[0] isnt '_'
           substitution = if isObjArr data[p] then @apply data[p], tpl[p], state else data[p]
           t = replace t, p, substitution
+        t = replaceCounters t, state
         t = replace t
       else # data as string
         t = replace t, '', data
         t = replaceCounters t, state
-    state.down()
-    result
 
 exports.Templator = Templator
 exports.create = (opts) ->
