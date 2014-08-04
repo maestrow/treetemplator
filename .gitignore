@@ -2,6 +2,7 @@
 
 *.js
 *.map
+!treetemplator.js
 
 ## Directory-based project format
 .idea/

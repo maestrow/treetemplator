@@ -36,7 +36,7 @@ data =
 templates =
   _: """
      Realty Dashboard. Today is ${date}.
-     ${promo}
+
      Todays offers:
      ${offers}
 
@@ -52,6 +52,5 @@ templates =
   agents:
     _: '* ${first} ${last}'
     _delimeter: '\n'
-  #date: '${}'
 
 console.log treetpl.apply data, templates
