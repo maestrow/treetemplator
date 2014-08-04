@@ -2,6 +2,9 @@ treetpl = require('../treetemplator').create()
 
 data =
   date: new Date()
+  promo:
+    logo: ''
+    text: ''
   offers: [
     {
       caption: 'Laguna Villa'
@@ -32,7 +35,8 @@ data =
 
 templates =
   _: """
-     Realty Report at ${date}
+     Realty Dashboard. Today is ${date}.
+     ${promo}
      Todays offers:
      ${offers}
 
@@ -41,12 +45,13 @@ templates =
      """
   offers:
     _: """
-      ${price}: ${caption} at ${address} ${photos}
+      ${price}: ${caption} at ${address}. ${photos}
     """
     _delimeter: '\n'
     photos: '[${}]'
   agents:
     _: '* ${first} ${last}'
     _delimeter: '\n'
+  #date: '${}'
 
 console.log treetpl.apply data, templates
