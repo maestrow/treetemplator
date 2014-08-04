@@ -9,3 +9,6 @@ define templates
 and get a result
 
 : counters, tests, repo, package, how-to-debug?
+
+
+cake test
