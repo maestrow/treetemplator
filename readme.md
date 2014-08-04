@@ -89,9 +89,11 @@ See `demo` and `tests` for more details.
 ## Installation 
 
 To install and run tests:
-`$ git clone https://github.com/maestrow/treetemplator`
-`$ npm install`
-`$ cake test` - to run tests
+```
+$ git clone https://github.com/maestrow/treetemplator`
+$ npm install`
+$ cake test   # to run tests
+```
 
 To install on client-side use bower and requirejs:
 
