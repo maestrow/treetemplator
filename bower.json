@@ -1,0 +1,29 @@
+{
+  "name": "treetemplator",
+  "description": "Very simple but usefull hierarchical template engine",
+	"main": "treetemplator.js",
+  "version": "0.0.0",
+  "authors": [
+    "Andrey Shmelev <andrew.shmelev@gmail.com>"
+  ],
+	"homepage": "https://github.com/maestrow/treetemplator",
+	"keywords": [
+		"template",
+		"engine",
+		"tree",
+		"templator",
+		"treetemplator"
+	],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "demo",
+	  "test",
+    "tests",
+	  "Cakefile",
+	  "package.json"
+  ]
+}

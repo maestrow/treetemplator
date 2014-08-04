@@ -1,0 +1,17 @@
+{
+  "name": "treetemplator",
+  "version": "0.0.0",
+  "description": "what is it?",
+  "main": "treetemplator.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "test"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "mocha": "~1.21.3"
+  }
+}

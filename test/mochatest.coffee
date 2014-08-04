@@ -55,7 +55,7 @@ describe 'Simple data: string, array, object. Ex: "ab", ["a", "b"], {a: "aaa", b
 
 
 
-describe 'Hierarchies - most interesting cases', ->
+describe 'Hierarchies', ->
 
   it 'Array of objects', ->
     data = [ {a:'qwe'}, {a:'asd'} ]
@@ -91,7 +91,40 @@ describe 'Hierarchies - most interesting cases', ->
 
     check data, tpl, 'a:b:c:111;  b:c:121,c:122'
 
+describe 'Counters', ->
+  it 'should return two-level ordered list', ->
+    data =
+      list: [
+        { name: 'abc', list: ['a','b','c'] }
+        { name: 'def', list: ['d','e','f'] }
+        { name: 'ghi', list: ['g','h','i'] }
+      ]
 
+    tpl =
+      _: '${list}'
+      list:
+        _: '$0. ${name}\n${list}'
+        _delimeter: '\n'
+        list:
+          _: '$1.$0. ${}'
+          _delimeter: '\n'
+
+    result = [
+      '1. abc'
+      '1.1. a'
+      '1.2. b'
+      '1.3. c'
+      '2. def'
+      '2.1. d'
+      '2.2. e'
+      '2.3. f'
+      '3. ghi'
+      '3.1. g'
+      '3.2. h'
+      '3.3. i'
+    ].join '\n'
+
+    check data, tpl, result
 
 describe 'Uncommon cases', ->
 
