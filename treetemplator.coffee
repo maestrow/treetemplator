@@ -59,6 +59,14 @@ class Templator
         t = replaceCounters t, state
       t = replace t # remove empty variables
 
-exports.Templator = Templator
-exports.create = (opts) ->
+create = (opts) ->
   new Templator opts
+
+if typeof exports is 'object'
+  exports.Templator = Templator
+  exports.create = create
+else if typeof define is 'function' and define.amd
+  define {
+    Templator: Templator,
+    create: create
+  }
