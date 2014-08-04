@@ -11,6 +11,7 @@ task 'test', ->
       --reporter #{reporter}
       --require coffee-script
       --require test/test_helper.coffee
-  """, (error, stdout) ->
-    throw error if error
-    console.log stdout
+  """, (error, stdout, stderr) ->
+    console.log error.toString() if error
+    output = if error then stderr else stdout
+    console.log output

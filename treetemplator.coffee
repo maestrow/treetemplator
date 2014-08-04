@@ -25,12 +25,10 @@ class Templator
     @opts ?= {}
     @opts.defaultDelimeter ?= ''
 
-  replace = (tpl, variable = '\\w+', value = '') ->
+  replace = (tpl, variable = '\\w*', value = '') ->
     if tpl?
       r = new RegExp "\\$\\{#{variable}\\}", 'g'
       tpl.replace r, value.toString()
-    else
-      value.toString()
 
   replaceCounters = (tpl, state) ->
     if tpl?
@@ -56,10 +54,10 @@ class Templator
           substitution = if isObjArr data[p] then @apply data[p], tpl[p], state else data[p]
           t = replace t, p, substitution
         t = replaceCounters t, state
-        t = replace t
       else # data as string
-        t = replace t, '', data
+        t = if t? then t.replace /\$\{\}/g, data else data.toString()
         t = replaceCounters t, state
+      t = replace t # remove empty variables
 
 exports.Templator = Templator
 exports.create = (opts) ->
